@@ -1,0 +1,11 @@
+TODO - TEA Sécurité
+
+
+Les utilitaires:
+    - un programme qui calcule les nombres premiers compris entre les bornes spécifiées par un utilisateur
+    - un programme qui calcule les N décimales de PI spécifiées par l'utilisateur
+    - récupérer la valeur ASCII d'une chaine de caractères saisie
+    - programme qui teste différentes méthodes de tri de tableau
+    - résolution d'équation linéaire et du second ordre (afficher une courbe)
+    - calcul du Nième terme d'une suite donnée
+    - résolution d'un système d'équation avec matrices
