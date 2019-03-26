@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/Primes.dir/Utils_Primes.c.o  -o Primes -lm 

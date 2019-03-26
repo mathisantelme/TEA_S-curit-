@@ -1,1 +1,0 @@
-/usr/bin/cc    CMakeFiles/OrderResolve.dir/Utils_OrderResolve.c.o  -o OrderResolve -lm 

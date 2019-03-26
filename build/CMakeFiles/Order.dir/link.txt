@@ -1,1 +1,0 @@
-/usr/bin/cc   -rdynamic CMakeFiles/Order.dir/Utils_OrderResolve.c.o  -o Order 

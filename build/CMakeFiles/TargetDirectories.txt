@@ -1,6 +1,0 @@
-/home/kalhan/Documents/FAC/L3/Semestre_6/Sécurité/TEA_Securite/build/CMakeFiles/rebuild_cache.dir
-/home/kalhan/Documents/FAC/L3/Semestre_6/Sécurité/TEA_Securite/build/CMakeFiles/Pi.dir
-/home/kalhan/Documents/FAC/L3/Semestre_6/Sécurité/TEA_Securite/build/CMakeFiles/Primes.dir
-/home/kalhan/Documents/FAC/L3/Semestre_6/Sécurité/TEA_Securite/build/CMakeFiles/edit_cache.dir
-/home/kalhan/Documents/FAC/L3/Semestre_6/Sécurité/TEA_Securite/build/CMakeFiles/OrderResolve.dir
-/home/kalhan/Documents/FAC/L3/Semestre_6/Sécurité/TEA_Securite/build/CMakeFiles/SolveLinear.dir
