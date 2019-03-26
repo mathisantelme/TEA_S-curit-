@@ -1,2 +1,3 @@
-# TEA_S-curit-
+# TEA_Securite
+
 Projet de Sécurité de l'ULR

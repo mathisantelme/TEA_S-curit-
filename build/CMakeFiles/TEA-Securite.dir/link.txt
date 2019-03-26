@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/TEA-Securite.dir/Utils_OrderResolve.c.o  -o TEA-Securite -lm 

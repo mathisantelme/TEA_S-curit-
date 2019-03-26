@@ -1,0 +1,12 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kalhan/Documents/FAC/L3/Semestre_6/Sécurité/TEA_Securite/src/Utils_PI.c
+stdio.h
+-
+

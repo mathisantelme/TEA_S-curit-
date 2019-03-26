@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/project_name.dir/Utils_OrderResolve.c.o  -o project_name 
