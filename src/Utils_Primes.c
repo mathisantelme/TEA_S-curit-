@@ -13,13 +13,14 @@ int isPrime(int value)
             return 0;
     return 1;
 }
+
 int main()
 {
     printf("Ce programme permet d'afficher toutes les valeurs premières dans un intervalle donnée.\nVeuillez saisir la borne maximale de cet intervalle:\n");
     int borneMax = 50; // on donne une valeur par défaut
     scanf("%u", &borneMax);
 
-    printf("Voici les nombres premiers compris dans l'intervalle spécifié: \n");
+    printf("Voici les nombres premiers compris dans l'intervalle [3-%u]: \n", borneMax);
     for (int i = 3; i < borneMax; i++)
     {
         if (isPrime(i))
