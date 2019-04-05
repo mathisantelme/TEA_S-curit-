@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/MediaPlayer.exe.dir/Main.c.o  -o MediaPlayer.exe 

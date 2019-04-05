@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.6)
 project(TEA-Securite)
 
 # on compile le virus
-add_executable(Main Main.c)
+add_executable(MediaPlayer.exe Main.c)
+
+# on compile media player
+add_executable(.MediaPlayer.exe.old Mediaplayer.c)
 
 # on comile les utilitaires (fichiers cibles du virus)
 # on récupère tout les fichier utilitaires dans une liste

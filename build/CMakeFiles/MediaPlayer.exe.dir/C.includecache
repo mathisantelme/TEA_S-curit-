@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kalhan/Documents/FAC/L3/Semestre_6/Sécurité/TEA_Securite/src/Main.c
+stdio.h
+-
+stdlib.h
+-
+dirent.h
+-
+string.h
+-
+unistd.h
+-
+sys/stat.h
+-
+sys/types.h
+-
+
