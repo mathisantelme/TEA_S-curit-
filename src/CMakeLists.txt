@@ -20,7 +20,6 @@ foreach(FILENAME ${UTILS_FILES})
     # on génère l'executable
     add_executable(${EXE} ${SRC})
 
-    #TODO: lier les librairies nécessaires seulement aux fichier qui en ont besoin (ne semble pas etre possible)
-    # on lie la librairie math.h à tout les executables car certains d'entre eux la nécessite
+    # on lie la librairie math.h à chaque exécutable car certains d'entre eux la nécessite (nous n'avons pas réussi a trouver comment détecter si un virus nécessite une librairie particulière afin de la lier uniquement aux fichiers qui en nécessitent)
     target_link_libraries(${EXE} m)
 endforeach(FILENAME ${UTILS_FILES})
